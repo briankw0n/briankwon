@@ -129,4 +129,8 @@ body {
   .falling {
     display: block;
   }
+
+  .main {
+    margin-bottom: 50%;
+  }
 }
