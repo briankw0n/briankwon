@@ -199,9 +199,14 @@ function createFallingElement() {
     binaryElement.style.top = '100%';
   }, 0);
 }
+setInterval(createFallingElement, 1);
 
-function getRandomMultipleOfFive() {
-  return Math.floor(Math.random() * 21) * 5; // Generates random multiples of 5 from 0 to 100 (inclusive)
+// Function to toggle dark mode
+function toggleDarkMode() {
+  const body = document.body;
+  body.classList.toggle("light-mode");
 }
 
-setInterval(createFallingElement, 1);
+// Event listener for the dark mode toggle image
+const darkModeToggleImg = document.getElementById("dark-mode-toggle");
+darkModeToggleImg.addEventListener("click", toggleDarkMode);

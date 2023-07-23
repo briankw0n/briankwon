@@ -1,4 +1,4 @@
-html, body {
+body {
   margin: 0;
   padding: 0;
   font-family: "Source Code Pro", monospace;
@@ -37,36 +37,48 @@ html, body {
   width: 50%;
   height: 100vh;
   font-size: 50pt;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1frauto;
   align-items: center;
   justify-content: center;
 }
 
+.dark {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .dark img {
   filter: invert(100%);
+  width: 75%;
+  height: auto;
+}
+
+.light-mode {
+  background-color: white;
+  color: black;
+  filter: brightness(0) invert(0);
 }
 
 .name {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 100px;
+  justify-content: center;
   font-weight: bold;
   text-transform: uppercase;
-  /* text-align: center; */
 }
 
-.last-name {
-  flex-grow: 1;
-  /* letter-spacing: 0.2em; */
+.first-name {
+  margin-bottom: -30px;
 }
 
 .links {
   filter: brightness(0) invert(1);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .links a {
@@ -74,12 +86,9 @@ html, body {
   align-self: center;
   justify-content: center;
   margin: 0 10px;
-  width: 30%;
-  height: 20%;
-  overflow: hidden;
+  max-width: 30px;
 }
 
 .links img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
