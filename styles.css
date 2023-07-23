@@ -114,7 +114,11 @@ body {
 }
 
 .links img {
-  max-width: 100%;
+  width: 100%;
+}
+
+.scale img {
+  width: 120%;
 }
 
 @media (max-width: 768px) {
