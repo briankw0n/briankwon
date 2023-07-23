@@ -140,7 +140,7 @@ function fillWithRandomBinary() {
 
   const updateContent = () => {
     let content = "";
-    const width = window.innerWidth / 2 / getCharacterWidth("1", 30);
+    const width = (window.innerWidth / 2) / getCharacterWidth("1", 30);
     const height = window.innerHeight / getCharacterHeight("1", 30);
 
     for (let i = 0; i < height; i++) {
@@ -148,10 +148,10 @@ function fillWithRandomBinary() {
         const binary = Math.random() < 0.5 ? "0" : "1";
         content += binary;
       }
-      content += "\n";
+      content += "<br>";
     }
 
-    leftDiv.textContent = content;
+    leftDiv.innerHTML = content;
   };
 
   // Initial update
@@ -159,47 +159,63 @@ function fillWithRandomBinary() {
 
   // Refresh every second (1000 milliseconds)
   setInterval(updateContent, 100);
+
+  // Set timeout to make the numbers disappear after 2 seconds
+  // setTimeout(() => {
+  //   leftDiv.style.transition = "opacity 2s"; // Apply a transition to the opacity property with a longer duration (3 seconds)
+  //   leftDiv.style.opacity = "0"; // Set opacity to 0 for fade-out effect
+  // }, 1500);
 }
-// fillWithRandomBinary();
+
+// Call the function to fill the left div completely with random 0's and 1's and make them disappear after 2 seconds with a slower fade-out effect
+fillWithRandomBinary();
+
+//////////////////////////////////////////////////////////////////
 
 function generateRandomBinary() {
   return Math.random() < 0.5 ? '0' : '1';
 }
 
-function getRandomMultipleOfFive() {
-  return Math.floor(Math.random() * 21) * 5; // Generates random multiples of 5 from 0 to 100 (inclusive)
+function getRandomMultipleOfTen() {
+  return Math.floor(Math.random() * 11) * 10; // Generates random multiples of 10 from 0 to 100 (inclusive)
 }
 
 function getRandomOpacity() {
   return Math.random() * 0.9 + 0.1; // Generates a random opacity between 0.1 and 1.0
 }
 
-
 function createFallingElement() {
-  const fallingTextElement = document.querySelector('.left');
+  const fallingTextElement = document.querySelector('.falling');
 
   const binaryElement = document.createElement('span');
-  binaryElement.classList.add('falling-text');
   binaryElement.textContent = generateRandomBinary();
   binaryElement.style.position = 'absolute';
 
-  binaryElement.style.left = `${getRandomMultipleOfFive()}%`; // Random horizontal position from 0 to 100%
-  binaryElement.style.top = '0';
-  binaryElement.style.transition = 'top 2s linear'; // Falling transition
+  // const initialOpacity = getRandomOpacity(); // Get the initial random opacity
+  // binaryElement.style.opacity = initialOpacity;
 
-  binaryElement.style.opacity = getRandomOpacity(); // Set random opacity for each number
+  binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
+  binaryElement.style.top = '0';
+  binaryElement.style.transition = 'top 2s linear, opacity 1s'; // Falling transition for top and opacity
 
   fallingTextElement.appendChild(binaryElement);
 
+  // Remove the falling element after the transition is complete
   binaryElement.addEventListener('transitionend', () => {
     fallingTextElement.removeChild(binaryElement);
   });
+
+  // Use setTimeout to adjust opacity gradually after a short delay
+  setTimeout(() => {
+    binaryElement.style.opacity = '0'; // Set opacity to 0 for the fading effect
+  }, 100);
 
   setTimeout(() => {
     binaryElement.style.top = '100%';
   }, 0);
 }
-setInterval(createFallingElement, 1);
+setInterval(createFallingElement, 50);
+
 
 // Function to toggle dark mode
 function toggleDarkMode() {
@@ -210,3 +226,43 @@ function toggleDarkMode() {
 // Event listener for the dark mode toggle image
 const darkModeToggleImg = document.getElementById("dark-mode-toggle");
 darkModeToggleImg.addEventListener("click", toggleDarkMode);
+
+//////////////////////////////////////////////////////////////////
+
+function fallingZero() {
+  const nameElement = document.querySelector('.name');
+  const nameFontSize = window.getComputedStyle(nameElement).getPropertyValue('font-size');
+
+  const fallingContainer = document.getElementById('falling-container');
+
+  const binaryElement = document.createElement('span');
+  binaryElement.classList.add('falling-text');
+  binaryElement.textContent = generateRandomBinary(); // Assuming you have a function to generate random 0's and 1's
+  binaryElement.style.position = 'absolute';
+  binaryElement.style.fontSize = nameFontSize; // Use the same font size as the name element
+
+  const topPosition = -50;
+  binaryElement.style.top = `${topPosition}px`;
+
+  const namePosition = nameElement.getBoundingClientRect();
+  const leftPosition = namePosition.left + namePosition.width / 2;
+  binaryElement.style.left = `${leftPosition}px`;
+
+  const fallingSpeed = getRandomFallingSpeed(); // Assuming you have a function to get a random falling speed
+  binaryElement.style.transition = `top ${fallingSpeed}s linear`;
+
+  fallingContainer.appendChild(binaryElement);
+
+  binaryElement.addEventListener('transitionend', () => {
+    fallingContainer.removeChild(binaryElement);
+  });
+
+  setTimeout(() => {
+    binaryElement.style.top = `${namePosition.top + namePosition.height}px`;
+  }, 0);
+}
+
+// Create 5 falling elements with a delay between each
+for (let i = 0; i < 5; i++) {
+  setTimeout(fallingZero, i * 1000); // Adjust the delay between each falling element as needed
+}
