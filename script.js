@@ -373,4 +373,4 @@ function createFallingElement() {
     fallingTextElement.appendChild(container);
   }
 }
-setInterval(createFallingElement, 300);
+setInterval(createFallingElement, 500);
