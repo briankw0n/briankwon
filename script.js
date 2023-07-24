@@ -176,8 +176,8 @@ function generateRandomBinary() {
   return Math.random() < 0.5 ? '0' : '1';
 }
 
-function getRandomMultipleOfTen() {
-  return Math.floor(Math.random() * 11) * 10; // Generates random multiples of 10 from 0 to 100 (inclusive)
+function getRandomMultipleOfOne() {
+  return Math.floor(Math.random() * 101); // Generates random multiples of 10 from 0 to 100 (inclusive)
 }
 
 function getRandomOpacity() {
@@ -194,7 +194,7 @@ function createFallingElement() {
   // const initialOpacity = getRandomOpacity(); // Get the initial random opacity
   // binaryElement.style.opacity = initialOpacity;
 
-  binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
+  binaryElement.style.left = `${getRandomMultipleOfOne()}%`; // Random horizontal position from 0 to 100%
   binaryElement.style.top = '0';
   binaryElement.style.transition = 'top 2s linear, opacity 1s'; // Falling transition for top and opacity
 
@@ -214,7 +214,7 @@ function createFallingElement() {
     binaryElement.style.top = '100%';
   }, 0);
 }
-setInterval(createFallingElement, 50);
+setInterval(createFallingElement, 10);
 
 
 // Function to toggle dark mode

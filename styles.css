@@ -83,6 +83,7 @@ body {
 
 .falling {
   display: none;
+  font-size: 20pt;
 }
 
 .name {
@@ -95,7 +96,7 @@ body {
 }
 
 .first-name {
-  margin-bottom: -30px;
+  /* margin-bottom: -30px; */
 }
 
 .links {
