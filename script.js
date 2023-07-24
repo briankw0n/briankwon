@@ -190,8 +190,8 @@ function generateRandomBinary() {
   return Math.random() < 0.5 ? '0' : '1';
 }
 
-function getRandomMultipleOfOne() {
-  return Math.floor(Math.random() * 101); // Generates random multiples of 10 from 0 to 100 (inclusive)
+function getRandomPercentage() {
+  return `${Math.floor(Math.random() * 101)}%`; // Generates a random percentage between 0% and 100%
 }
 
 function getRandomOpacity() {
@@ -209,7 +209,7 @@ function createFallingElement() {
   // const initialOpacity = getRandomOpacity(); // Get the initial random opacity
   // binaryElement.style.opacity = initialOpacity;
 
-  binaryElement.style.left = `${getRandomMultipleOfOne()}%`; // Random horizontal position from 0 to 100%
+  binaryElement.style.left = getRandomPercentage(); // Random horizontal position from 0 to 100%
   binaryElement.style.top = '0';
   binaryElement.style.transition = 'top 5s linear, opacity 5s'; // Falling transition for top and opacity
 
@@ -229,7 +229,7 @@ function createFallingElement() {
     binaryElement.style.top = '100%';
   }, 0);
 }
-// setInterval(createFallingElement, 1);
+// setInterval(createFallingElement, 1000);
 
 // setInterval(() => {
 //   // Call createFallingElement function multiple times within the interval
@@ -282,7 +282,7 @@ function createFallingHexElement() {
     hexElement.style.top = '100%';
   }, 0);
 }
-// setInterval(createFallingHexElement, 10);
+// setInterval(createFallingHexElement, 100);
 
 //////////////////////////////////////////////////////////////
 
@@ -346,16 +346,17 @@ function createFallingElement() {
     // container.style.position = 'relative';
     container.style.width = '100%';
     container.style.top = '0'; // Set the initial top position to 0 (start from the top)
+   
+    const binaryElement = document.createElement('span');
+    binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
 
     for (let j = 0; j < 5; j++) {
-      const binaryElement = document.createElement('span');
       binaryElement.textContent = generateRandomBinary();
       binaryElement.style.position = 'absolute';
-      binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
       binaryElement.style.top = `${-i * 25}%`; // Negative top position to make them start from the top
       binaryElement.style.transition = 'top 5s linear, opacity 5s'; // Falling transition for top and opacity
 
-      const opacity = 1 - j * 0.2; // Decreasing opacity for trailing elements
+      const opacity = getRandomOpacity(); // Decreasing opacity for trailing elements
       binaryElement.style.opacity = opacity; // Set initial opacity
 
       container.appendChild(binaryElement);
@@ -373,4 +374,4 @@ function createFallingElement() {
     fallingTextElement.appendChild(container);
   }
 }
-setInterval(createFallingElement, 500);
+setInterval(createFallingElement, 50);
