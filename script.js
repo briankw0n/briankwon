@@ -347,7 +347,7 @@ function createFallingElement() {
     container.style.width = '100%';
     container.style.top = '0'; // Set the initial top position to 0 (start from the top)
 
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < 10; j++) {
       const binaryElement = document.createElement('span');
       binaryElement.textContent = generateRandomBinary();
       binaryElement.style.position = 'absolute';
@@ -374,4 +374,4 @@ function createFallingElement() {
   }
 }
 
-setInterval(createFallingElement, 100);
+setInterval(createFallingElement, 200);
