@@ -334,6 +334,10 @@ function getRandomMultipleOfTen() {
   return Math.floor(Math.random() * 11) * 10; // Generates random multiples of 10 from 0 to 100
 }
 
+function getRandomPercentage() {
+  return `${Math.floor(Math.random() * 101)}%`; // Generates a random percentage between 0% and 100%
+}
+
 function getRandomOpacity() {
   return Math.random() * 0.9 + 0.1; // Generates a random opacity between 0.1 and 1.0
 }
@@ -348,7 +352,8 @@ function createFallingElement() {
     container.style.top = '0'; // Set the initial top position to 0 (start from the top)
    
     const binaryElement = document.createElement('span');
-    binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
+    // binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
+    binaryElement.style.left = getRandomPercentage();
 
     for (let j = 0; j < 5; j++) {
       binaryElement.textContent = generateRandomBinary();
