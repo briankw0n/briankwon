@@ -96,7 +96,7 @@ body {
 }
 
 .first-name {
-  /* margin-bottom: -30px; */
+  margin-bottom: -30px;
 }
 
 .links {
@@ -136,6 +136,6 @@ body {
   }
 
   .main {
-    margin-bottom: 50%;
+    margin-bottom: 25%;
   }
 }
