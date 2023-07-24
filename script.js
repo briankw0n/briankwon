@@ -105,6 +105,20 @@ function animateRandomBinary() {
 }
 // animateRandomBinary();
 
+///////////////////////////////////////////////////////////////
+
+// Function to toggle dark mode
+function toggleDarkMode() {
+  const body = document.body;
+  body.classList.toggle("light-mode");
+}
+
+// Event listener for the dark mode toggle image
+const darkModeToggleImg = document.getElementById("dark-mode-toggle");
+darkModeToggleImg.addEventListener("click", toggleDarkMode);
+
+///////////////////////////////////////////////////////////////
+
 function getCharacterWidth(char, fontSize) {
   const span = document.createElement("span");
   span.style.fontSize = `${fontSize}pt`;
@@ -190,13 +204,14 @@ function createFallingElement() {
   const binaryElement = document.createElement('span');
   binaryElement.textContent = generateRandomBinary();
   binaryElement.style.position = 'absolute';
+  // binaryElement.style.color = `#${generateRandomHexColor()}`; // Generate random text color
 
   // const initialOpacity = getRandomOpacity(); // Get the initial random opacity
   // binaryElement.style.opacity = initialOpacity;
 
   binaryElement.style.left = `${getRandomMultipleOfOne()}%`; // Random horizontal position from 0 to 100%
   binaryElement.style.top = '0';
-  binaryElement.style.transition = 'top 2s linear, opacity 1s'; // Falling transition for top and opacity
+  binaryElement.style.transition = 'top 5s linear, opacity 5s'; // Falling transition for top and opacity
 
   fallingTextElement.appendChild(binaryElement);
 
@@ -214,55 +229,149 @@ function createFallingElement() {
     binaryElement.style.top = '100%';
   }, 0);
 }
-setInterval(createFallingElement, 10);
+// setInterval(createFallingElement, 1);
 
-
-// Function to toggle dark mode
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle("light-mode");
-}
-
-// Event listener for the dark mode toggle image
-const darkModeToggleImg = document.getElementById("dark-mode-toggle");
-darkModeToggleImg.addEventListener("click", toggleDarkMode);
+// setInterval(() => {
+//   // Call createFallingElement function multiple times within the interval
+//   for (let i = 0; i < 5; i++) {
+//     createFallingElement();
+//   }
+// }, 1);
 
 //////////////////////////////////////////////////////////////////
 
-function fallingZero() {
-  const nameElement = document.querySelector('.name');
-  const nameFontSize = window.getComputedStyle(nameElement).getPropertyValue('font-size');
+function generateRandomHexChar() {
+  const hexChars = '0123456789ABCDEF';
+  return hexChars[Math.floor(Math.random() * hexChars.length)];
+}
 
-  const fallingContainer = document.getElementById('falling-container');
+function generateRandomHexColor() {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16); // Generates a random color in hexadecimal format (without leading #)
+  return randomColor.padStart(6, '0'); // Pad the color to 6 digits (e.g., '00FF00')
+}
 
-  const binaryElement = document.createElement('span');
-  binaryElement.classList.add('falling-text');
-  binaryElement.textContent = generateRandomBinary(); // Assuming you have a function to generate random 0's and 1's
-  binaryElement.style.position = 'absolute';
-  binaryElement.style.fontSize = nameFontSize; // Use the same font size as the name element
+function getRandomMultipleOfOne() {
+  return Math.floor(Math.random() * 101); // Generates random multiples of 10 from 0 to 100 (inclusive)
+}
 
-  const topPosition = -50;
-  binaryElement.style.top = `${topPosition}px`;
+function createFallingHexElement() {
+  const fallingTextElement = document.querySelector('.falling');
 
-  const namePosition = nameElement.getBoundingClientRect();
-  const leftPosition = namePosition.left + namePosition.width / 2;
-  binaryElement.style.left = `${leftPosition}px`;
+  const hexElement = document.createElement('span');
+  hexElement.textContent = generateRandomHexChar();
+  hexElement.style.position = 'absolute';
+  // hexElement.style.color = `#${generateRandomHexColor()}`; // Generate random text color
 
-  const fallingSpeed = getRandomFallingSpeed(); // Assuming you have a function to get a random falling speed
-  binaryElement.style.transition = `top ${fallingSpeed}s linear`;
+  hexElement.style.left = `${getRandomMultipleOfOne()}%`; // Random horizontal position from 0 to 100%
+  hexElement.style.top = '0';
+  hexElement.style.transition = 'top 5s linear, opacity 5s'; // Falling transition for top and opacity
 
-  fallingContainer.appendChild(binaryElement);
+  fallingTextElement.appendChild(hexElement);
 
-  binaryElement.addEventListener('transitionend', () => {
-    fallingContainer.removeChild(binaryElement);
+  // Remove the falling element after the transition is complete
+  hexElement.addEventListener('transitionend', () => {
+    fallingTextElement.removeChild(hexElement);
   });
 
+  // Use setTimeout to adjust opacity gradually after a short delay
   setTimeout(() => {
-    binaryElement.style.top = `${namePosition.top + namePosition.height}px`;
+    hexElement.style.opacity = '0'; // Set opacity to 0 for the fading effect
+  }, 100);
+
+  setTimeout(() => {
+    hexElement.style.top = '100%';
   }, 0);
 }
+// setInterval(createFallingHexElement, 10);
 
-// Create 5 falling elements with a delay between each
-for (let i = 0; i < 5; i++) {
-  setTimeout(fallingZero, i * 1000); // Adjust the delay between each falling element as needed
+//////////////////////////////////////////////////////////////
+
+// Function to generate random Japanese characters
+function generateRandomJapaneseCharacter() {
+  const characters = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
+  const randomIndex = Math.floor(Math.random() * characters.length);
+  return characters.charAt(randomIndex);
 }
+
+function createFallingJapaneseElement() {
+  const fallingTextElement = document.querySelector('.falling');
+
+  const japaneseElement = document.createElement('span');
+  japaneseElement.textContent = generateRandomJapaneseCharacter();
+  japaneseElement.style.position = 'absolute';
+  // japaneseElement.style.color = `#${generateRandomHexColor()}`; // Generate random text color
+
+  // const initialOpacity = getRandomOpacity(); // Get the initial random opacity
+  // japaneseElement.style.opacity = initialOpacity;
+
+  japaneseElement.style.left = `${getRandomMultipleOfOne()}%`; // Random horizontal position from 0 to 100%
+  japaneseElement.style.top = '0';
+  japaneseElement.style.transition = 'top 2s linear, opacity 1s'; // Falling transition for top and opacity
+
+  fallingTextElement.appendChild(japaneseElement);
+
+  // Remove the falling element after the transition is complete
+  japaneseElement.addEventListener('transitionend', () => {
+    fallingTextElement.removeChild(japaneseElement);
+  });
+
+  // Use setTimeout to adjust opacity gradually after a short delay
+  setTimeout(() => {
+    japaneseElement.style.opacity = '0'; // Set opacity to 0 for the fading effect
+  }, 100);
+
+  setTimeout(() => {
+    japaneseElement.style.top = '100%';
+  }, 0);
+}
+// setInterval(createFallingJapaneseElement, 1); // Call createFallingElement every 100 milliseconds
+
+function generateRandomBinary() {
+  return Math.random() < 0.5 ? '0' : '1';
+}
+
+function getRandomMultipleOfTen() {
+  return Math.floor(Math.random() * 11) * 10; // Generates random multiples of 10 from 0 to 100
+}
+
+function getRandomOpacity() {
+  return Math.random() * 0.9 + 0.1; // Generates a random opacity between 0.1 and 1.0
+}
+
+function createFallingElement() {
+  const fallingTextElement = document.querySelector('.falling');
+
+  for (let i = 0; i < 5; i++) {
+    const container = document.createElement('div');
+    // container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.top = '0'; // Set the initial top position to 0 (start from the top)
+
+    for (let j = 0; j < 3; j++) {
+      const binaryElement = document.createElement('span');
+      binaryElement.textContent = generateRandomBinary();
+      binaryElement.style.position = 'absolute';
+      binaryElement.style.left = `${getRandomMultipleOfTen()}%`; // Random horizontal position from 0 to 100%
+      binaryElement.style.top = `${-i * 25}%`; // Negative top position to make them start from the top
+      binaryElement.style.transition = 'top 3s linear, opacity 3s'; // Falling transition for top and opacity
+
+      const opacity = 1 - j * 0.2; // Decreasing opacity for trailing elements
+      binaryElement.style.opacity = opacity; // Set initial opacity
+
+      container.appendChild(binaryElement);
+
+      // Use setTimeout to adjust opacity gradually after a short delay
+      setTimeout(() => {
+        binaryElement.style.opacity = '0'; // Set opacity to 0 for the fading effect
+      }, 100);
+
+      setTimeout(() => {
+        binaryElement.style.top = '100%';
+      }, 0);
+    }
+
+    fallingTextElement.appendChild(container);
+  }
+}
+
+setInterval(createFallingElement, 75);
