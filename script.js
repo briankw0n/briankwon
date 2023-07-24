@@ -374,4 +374,4 @@ function createFallingElement() {
   }
 }
 
-setInterval(createFallingElement, 75);
+setInterval(createFallingElement, 100);
